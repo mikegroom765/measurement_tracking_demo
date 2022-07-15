@@ -11,6 +11,8 @@ then
     chmod a+r $XAUTH
 fi
 
+docker build -t measurement_tracking_demo_image . 
+
 docker run -it \
     --privileged \
     --env="DISPLAY=$DISPLAY" \
