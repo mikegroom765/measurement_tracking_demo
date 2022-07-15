@@ -1,8 +1,6 @@
 #include <ros/ros.h>
 #include <ros/publisher.h>
 #include <ros/subscriber.h>
-#include <rtabmap_ros/MsgConversion.h>
-#include <rtabmap_ros/UserData.h>
 #include <visualization_msgs/Marker.h>
 #include <geometry_msgs/Pose.h>
 #include <nav_msgs/Odometry.h>
