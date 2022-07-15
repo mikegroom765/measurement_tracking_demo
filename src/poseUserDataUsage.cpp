@@ -21,13 +21,13 @@ public:
 
 void CameraPoseSub::odomCallback(const nav_msgs::Odometry::ConstPtr& msg){
 
-    self.pos_x = msg->pose.pose.position.x;
-    self.pos_y = msg->pose.pose.position.y;
-    self.pos_z = msg->pose.pose.position.z;
-    self.or_x = msg->pose.pose.orientation.x;
-    self.or_y = msg->pose.pose.orientation.y;
-    self.or_z = msg->pose.pose.orientation.z;
-    self.or_w = msg->pose.pose.orientation.w;
+    pos_x = msg->pose.pose.position.x;
+    pos_y = msg->pose.pose.position.y;
+    pos_z = msg->pose.pose.position.z;
+    or_x = msg->pose.pose.orientation.x;
+    or_y = msg->pose.pose.orientation.y;
+    or_z = msg->pose.pose.orientation.z;
+    or_w = msg->pose.pose.orientation.w;
 }
 
 int main(int argc, char** argv)
