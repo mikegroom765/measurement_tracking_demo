@@ -19,7 +19,7 @@ public:
     double or_w;
 };
 
-void CameraPoseSub::odomCallback(const nav_msgs::Path::ConstPtr& msg){
+void CameraPoseSub::odomCallback(const nav_msgs::Odometry::ConstPtr& msg){
 
     self.pos_x = msg->pose.pose.position.x;
     self.pos_y = msg->pose.pose.position.y;
@@ -32,7 +32,7 @@ void CameraPoseSub::odomCallback(const nav_msgs::Path::ConstPtr& msg){
 
 int main(int argc, char** argv)
 {
-    ros::init(argc, argv, "marker_pose_pub")
+    ros::init(argc, argv, "marker_pose_pub");
 
     ros::NodeHandle nh_0;
     ros::NodeHandle nh_1;
@@ -46,10 +46,10 @@ int main(int argc, char** argv)
 
     while(ros::ok())
     {
-        ros::Time stamp = ros::Time:now();
+        ros::Time stamp = ros::Time::now();
 
         input = "";
-        cin >> input;
+        std::cin >> input;
         
         if (input == " ")
         {
