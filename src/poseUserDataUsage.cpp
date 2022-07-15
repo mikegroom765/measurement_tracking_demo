@@ -9,7 +9,7 @@
 class CameraPoseSub
 {
 public:
-    void odomCallback(const nav_msgs::Path::ConstPtr& msg);
+    void odomCallback(const nav_msgs::Odometry::ConstPtr& msg);
     double pos_x;
     double pos_y;
     double pos_z;
