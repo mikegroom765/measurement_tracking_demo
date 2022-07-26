@@ -14,6 +14,7 @@ fi
 docker build -t measurement_tracking_demo_image . 
 
 docker run -it \
+    --net=host \
     --privileged \
     --env="DISPLAY=$DISPLAY" \
     --env="QT_X11_NO_MITSHM=1" \
@@ -22,4 +23,4 @@ docker run -it \
     --volume="$XAUTH:$XAUTH" \
     --runtime=nvidia \
     measurement_tracking_demo_image \
-    bash
+    roslaunch measurement_tracking_demo realsense_rtabmap.launch
