@@ -11,3 +11,5 @@ $ xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
 
 May have to do:  
 $xhost +local:docker~
+
+Test
