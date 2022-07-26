@@ -18,8 +18,11 @@ RUN apt-get update && apt-get install -y git && apt-get install -y \
 RUN source /opt/ros/noetic/setup.bash \
     && mkdir -p /measurement_demo_ws/src \
     && cd /measurement_demo_ws/src \
-    && catkin_init_workspace \
-    && git clone https://github.com/mikegroom765/measurement_tracking_demo.git
+    && catkin_init_workspace
+
+ADD https://api.github.com/repos/mikegroom765/measurement_tracking_demo/git/refs/heads/master version.json
+RUN git clone -b master https://github.com/mikegroom765/$measurement_tracking_demo.git $GIT_HOME/
+#    && git clone https://github.com/mikegroom765/measurement_tracking_demo.git
 
 # Build the Catkin workspace and ensure it's sourced
 
