@@ -13,7 +13,8 @@ RUN apt-get update && apt-get install -y git && apt-get install -y \
     ros-noetic-rtabmap \
     ros-noetic-rtabmap-ros \
     ros-noetic-realsense2-camera \
-    ros-noetic-aruco-detect
+    ros-noetic-aruco-detect \
+    ros-noetic-octomap-rviz-plugins
 
 # Create a Catkin workspace and clone demo code
 RUN source /opt/ros/noetic/setup.bash \
