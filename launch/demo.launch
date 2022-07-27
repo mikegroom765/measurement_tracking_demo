@@ -26,4 +26,7 @@
         <arg name="dictionary"              value="4"/>
     </include>
 
+    <node name="publishMarker" pkg="measurement_tracking_demo" type="measurement_tracking_demo_node">
+
+    </node>
 </launch>
