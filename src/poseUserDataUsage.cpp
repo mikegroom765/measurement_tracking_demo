@@ -17,6 +17,7 @@ public:
     double or_y;
     double or_z;
     double or_w;
+    bool button_press;
 };
 
 void CameraPoseSub::odomCallback(const nav_msgs::Odometry::ConstPtr& msg){
@@ -30,16 +31,21 @@ void CameraPoseSub::odomCallback(const nav_msgs::Odometry::ConstPtr& msg){
     or_w = msg->pose.pose.orientation.w;
 }
 
+/* void CameraPoseSub::buttonCallback(const ){
+
+} */
+
 int main(int argc, char** argv)
 {
     ros::init(argc, argv, "marker_pose_pub");
 
     ros::NodeHandle nh_0;
-    ros::NodeHandle nh_1;
 
     CameraPoseSub cps;
     ros::Subscriber cameraPoseSub = nh_0.subscribe("rtabmap/odom", 10, &CameraPoseSub::odomCallback, &cps);
-    ros::Publisher vis_pub = nh_1.advertise<visualization_msgs::Marker>( "visualization_marker", 0);
+    ros::Publisher vis_pub = nh_0.advertise<visualization_msgs::Marker>( "visualization_marker", 0);
+    // ros::Subscriber buttonSub = nh_0.subscribe("rviz/yes_no_button", 1, &CameraPoseSub::buttonCallback);
+
 
     std::string input;
     int marker_id = 0;
