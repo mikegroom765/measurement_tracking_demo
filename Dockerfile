@@ -12,7 +12,8 @@ SHELL [ "/bin/bash" , "-c" ]
 RUN apt-get update && apt-get install -y git && apt-get install -y \
     ros-noetic-rtabmap \
     ros-noetic-rtabmap-ros \
-    ros-noetic-realsense2-camera
+    ros-noetic-realsense2-camera \
+    ros-noetic-aruco-detect
 
 # Create a Catkin workspace and clone demo code
 RUN source /opt/ros/noetic/setup.bash \
