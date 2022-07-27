@@ -11,7 +11,7 @@ then
     chmod a+r $XAUTH
 fi
 
-docker build -t measurement_tracking_demo_image . 
+docker build --no-cache -t measurement_tracking_demo_image . 
 
 docker run -it \
     --net=host \
