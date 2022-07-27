@@ -53,7 +53,7 @@ int main(int argc, char** argv)
 
         if(client.call(req, res)){
             ROS_INFO_STREAM("service request was successful!");
-        
+        }
         if(res.yes){
             ROS_INFO_STREAM("Button yes");
         }
