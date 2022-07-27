@@ -51,7 +51,7 @@ int main(int argc, char** argv)
         client.call(button_press);
         
         if(button_press){
-            ROS_INFO_STREAM("TEST!!")
+            ROS_INFO_STREAM("TEST!!");
         }
 
         visualization_msgs::Marker marker;
