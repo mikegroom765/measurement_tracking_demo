@@ -20,9 +20,8 @@
 	</group>
 
     <include file="$(find aruco_detect)/launch/aruco_detect.launch">
-        <arg name="camera"                  value="/camera"/>
-        <arg name="image"                   value="/color/image_raw"/>
-        <arg name="transport"               value=""/>
+        <arg name="camera"                  value="/camera/color"/>
+        <arg name="image"                   value="image_raw"/>
         <arg name="fiducial_len"            value="0.09"/>
         <arg name="dictionary"              value="4"/>
     </include>
