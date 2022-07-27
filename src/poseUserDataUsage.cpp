@@ -5,6 +5,7 @@
 #include <geometry_msgs/Pose.h>
 #include <nav_msgs/Odometry.h>
 #include <iostream>
+#include <jsk_gui_msgs/YesNo.h>
 
 class CameraPoseSub
 {
@@ -39,19 +40,25 @@ int main(int argc, char** argv)
     CameraPoseSub cps;
     ros::Subscriber cameraPoseSub = nh.subscribe("rtabmap/odom", 10, &CameraPoseSub::odomCallback, &cps);
     ros::Publisher vis_pub = nh.advertise<visualization_msgs::Marker>( "visualization_marker", 0);
-    ros::ServiceClient client = nh.serviceClient<bool>("/rviz/yes_no_button");
+    ros::ServiceClient client = nh.serviceClient<jsk_gui_msgs::YesNo::Response>("/rviz/yes_no_button");
 
     int marker_id = 0;
 
     while(ros::ok())
     {
         ros::Time stamp = ros::Time::now();
-        bool button_press = false; 
+        // jsk_gui_msgs::YesNo::Response button_press; 
+        jsk_gui_msgs::YesNo::Request req;
+        jsk_gui_msgs::YesNo::Response res;
 
-        client.call(button_press);
+        if(client.call(req, res)){
+            ROS_INFO_STREAM("service request was successful!");
         
-        if(button_press){
-            ROS_INFO_STREAM("TEST!!");
+        if(res.yes){
+            ROS_INFO_STREAM("Button yes");
+        }
+        else{
+            ROS_INFO_STREAM("Button no");
         }
 
         visualization_msgs::Marker marker;
