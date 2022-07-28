@@ -31,7 +31,8 @@ RUN source /opt/ros/noetic/setup.bash \
 
 RUN source /opt/ros/noetic/setup.bash \
     && cd measurement_demo_ws \
-    && catkin_make
+    && catkin_make \
+    && source devel/setup.bash
 RUN echo "source /measurement_demo_ws/devel/setup.bash" >> ~/.bashrc
 
 WORKDIR /measurement_demo_ws/src/measurement_tracking_demo/launch
