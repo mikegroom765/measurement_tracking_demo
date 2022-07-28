@@ -38,7 +38,7 @@ RUN source /opt/ros/noetic/setup.bash \
     && chmod +x poseUserDataUsage.cpp \
     && cd / \
     && ./ros_entrypoint.sh \
-    cd measurement_demo_ws 
+    && cd measurement_demo_ws 
     
 RUN echo "source /measurement_demo_ws/devel/setup.bash" >> ~/.bashrc
 
