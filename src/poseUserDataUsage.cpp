@@ -4,6 +4,7 @@
 #include <visualization_msgs/Marker.h>
 #include <geometry_msgs/Pose.h>
 #include <nav_msgs/Odometry.h>
+#include <fiducial_msgs/FiducialTransform.h>
 #include <iostream>
 #include <jsk_gui_msgs/YesNo.h>
 
