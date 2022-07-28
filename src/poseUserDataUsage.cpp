@@ -50,7 +50,7 @@ int main(int argc, char** argv)
         jsk_gui_msgs::YesNo::Request req;
         jsk_gui_msgs::YesNo::Response res;
 
-        client.call(req, res)
+        client.call(req, res);
         
         if(res.yes){
             ROS_INFO_STREAM("service request was successful!");
