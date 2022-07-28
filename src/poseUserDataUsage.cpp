@@ -50,7 +50,6 @@ int main(int argc, char** argv)
         jsk_gui_msgs::YesNo::Request req;
         jsk_gui_msgs::YesNo::Response res;
 
-        // This all works! The problem is some source/cmake stuff, we can launch this with rosrun and the button press works!
         if(client.call(req, res)){
             ROS_INFO_STREAM("service request was successful!");
         }
