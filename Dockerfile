@@ -33,7 +33,9 @@ RUN source /opt/ros/noetic/setup.bash \
     && cd measurement_demo_ws \
     && catkin_make \
     && catkin_make --only-pkg-with-deps measurement_tracking_demo \
-    && source /measurement_demo_ws/devel/setup.bash
+    && source /measurement_demo_ws/devel/setup.bash \
+    && cd src/measurement_tracking_demo/src/ \
+    && chmod +x poseUserDataUsage.cpp
 RUN echo "source /measurement_demo_ws/devel/setup.bash" >> ~/.bashrc
 
 WORKDIR /measurement_demo_ws/src/measurement_tracking_demo/launch
