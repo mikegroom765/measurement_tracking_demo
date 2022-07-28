@@ -20,15 +20,15 @@ public:
     double or_w;
 };
 
-void CameraPoseSub::odomCallback(const nav_msgs::Odometry::ConstPtr& msg){
+void CameraPoseSub::odomCallback(const fiducial_msgs::FiducialTransform::ConstPtr& msg){
 
-    pos_x = msg->pose.pose.position.x;
-    pos_y = msg->pose.pose.position.y;
-    pos_z = msg->pose.pose.position.z;
-    or_x = msg->pose.pose.orientation.x;
-    or_y = msg->pose.pose.orientation.y;
-    or_z = msg->pose.pose.orientation.z;
-    or_w = msg->pose.pose.orientation.w;
+    pos_x = msg->transform.translation.x;
+    pos_y = msg->transform.translation.y;
+    pos_z = msg->transform.translation.z;
+    or_x = msg->transform.rotation.x;
+    or_y = msg->transform.rotation.y;
+    or_z = msg->transform.rotation.z;
+    or_w = msg->transform.rotation.w;
 }
 
 int main(int argc, char** argv)
@@ -38,7 +38,7 @@ int main(int argc, char** argv)
     ros::NodeHandle nh;
 
     CameraPoseSub cps;
-    ros::Subscriber cameraPoseSub = nh.subscribe("rtabmap/odom", 10, &CameraPoseSub::odomCallback, &cps);
+    ros::Subscriber cameraPoseSub = nh.subscribe("/fiducial_transforms", 10, &CameraPoseSub::odomCallback, &cps);
     ros::Publisher vis_pub = nh.advertise<visualization_msgs::Marker>( "visualization_marker", 0);
     ros::ServiceClient client = nh.serviceClient<jsk_gui_msgs::YesNo::Response>("/rviz/yes_no_button");
 
@@ -70,8 +70,8 @@ int main(int argc, char** argv)
             marker.pose.orientation.z = cps.or_z;
             marker.pose.orientation.w = cps.or_w;
             marker.scale.x = 0.2;
-            marker.scale.y = 0.1;
-            marker.scale.z = 0.1;
+            marker.scale.y = 0.05;
+            marker.scale.z = 0.05;
             marker.color.a = 1.0;
             marker.color.r = 0.0;
             marker.color.g = 1.0;
