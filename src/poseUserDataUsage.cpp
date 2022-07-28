@@ -69,7 +69,7 @@ int main(int argc, char** argv)
             marker.pose.orientation.y = cps.or_y;
             marker.pose.orientation.z = cps.or_z;
             marker.pose.orientation.w = cps.or_w;
-            marker.scale.x = 1;
+            marker.scale.x = 0.2;
             marker.scale.y = 0.1;
             marker.scale.z = 0.1;
             marker.color.a = 1.0;
