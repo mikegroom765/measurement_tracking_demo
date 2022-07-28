@@ -10,7 +10,7 @@
         <arg name="rgb_topic"                value="/camera/color/image_raw"/>
         <arg name="camera_info_topic"        value="/camera/color/camera_info"/>
         <arg name="approx_sync"              value="false"/>
-        <arg name="rtbamapviz"               value="false"/>
+        <arg name="rtabmapviz"               value="false"/>
         <arg name="rviz"                     value="true"/>
         <arg name="rviz_cfg"                 value="$(find measurement_tracking_demo)/launch/config/demo.rviz" />
     </include>
