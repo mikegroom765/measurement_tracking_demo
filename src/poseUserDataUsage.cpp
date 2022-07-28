@@ -19,17 +19,24 @@ public:
     double or_y;
     double or_z;
     double or_w;
+    double time_last_seen;
 };
 
 void CameraPoseSub::odomCallback(const fiducial_msgs::FiducialTransform::ConstPtr& msg){
 
-    pos_x = msg->transform.translation.x;
-    pos_y = msg->transform.translation.y;
-    pos_z = msg->transform.translation.z;
-    or_x = msg->transform.rotation.x;
-    or_y = msg->transform.rotation.y;
-    or_z = msg->transform.rotation.z;
-    or_w = msg->transform.rotation.w;
+    int fid_id = msg->fiducial_id;
+    if (fid_id == 1)
+    {
+        time_last_seen = ros::Time::now().toSec();
+        pos_x = msg->transform.translation.x;
+        pos_y = msg->transform.translation.y;
+        pos_z = msg->transform.translation.z;
+        or_x = msg->transform.rotation.x;
+        or_y = msg->transform.rotation.y;
+        or_z = msg->transform.rotation.z;
+        or_w = msg->transform.rotation.w;
+    }
+
 }
 
 int main(int argc, char** argv)
@@ -44,41 +51,50 @@ int main(int argc, char** argv)
     ros::ServiceClient client = nh.serviceClient<jsk_gui_msgs::YesNo::Response>("/rviz/yes_no_button");
 
     int marker_id = 0;
+    double threshold = 0.2;
 
     while(ros::ok())
     {
-        ros::Time stamp = ros::Time::now();
+        double time_stamp = ros::Time::now().toSec();
         jsk_gui_msgs::YesNo::Request req;
         jsk_gui_msgs::YesNo::Response res;
 
         client.call(req, res);
-        
+        ROS_INFO_STREAM("TEST");
         if(res.yes){
-            ROS_INFO_STREAM("service request was successful!");
+
             ROS_INFO_STREAM("Button yes");
-            visualization_msgs::Marker marker;
-            marker.header.frame_id = "camera_color_optical_frame";
-            marker.header.stamp = ros::Time();
-            marker.ns = "my_namespace";
-            marker.id = marker_id;
-            marker.type = visualization_msgs::Marker::ARROW;
-            marker.action = visualization_msgs::Marker::ADD;
-            marker.pose.position.x = cps.pos_x;
-            marker.pose.position.y = cps.pos_y;
-            marker.pose.position.z = cps.pos_z;
-            marker.pose.orientation.x = cps.or_x;
-            marker.pose.orientation.y = cps.or_y;
-            marker.pose.orientation.z = cps.or_z;
-            marker.pose.orientation.w = cps.or_w;
-            marker.scale.x = 0.2;
-            marker.scale.y = 0.05;
-            marker.scale.z = 0.05;
-            marker.color.a = 1.0;
-            marker.color.r = 0.0;
-            marker.color.g = 1.0;
-            marker.color.b = 0.0;
-            vis_pub.publish( marker );
-            marker_id += 1;
+
+            if (time_stamp - cps.time_last_seen < threshold)
+            {
+                ROS_INFO_STREAM("Marker seen within threshold time!");
+                visualization_msgs::Marker marker;
+                marker.header.frame_id = "camera_color_optical_frame";
+                marker.header.stamp = ros::Time();
+                marker.ns = "my_namespace";
+                marker.id = marker_id;
+                marker.type = visualization_msgs::Marker::ARROW;
+                marker.action = visualization_msgs::Marker::ADD;
+                marker.pose.position.x = cps.pos_x;
+                marker.pose.position.y = cps.pos_y;
+                marker.pose.position.z = cps.pos_z;
+                marker.pose.orientation.x = cps.or_x;
+                marker.pose.orientation.y = cps.or_y;
+                marker.pose.orientation.z = cps.or_z;
+                marker.pose.orientation.w = cps.or_w;
+                marker.scale.x = 0.2;
+                marker.scale.y = 0.05;
+                marker.scale.z = 0.05;
+                marker.color.a = 1.0;
+                marker.color.r = 0.0;
+                marker.color.g = 1.0;
+                marker.color.b = 0.0;
+                vis_pub.publish( marker );
+                marker_id += 1;
+            }
+            else{
+                ROS_INFO_STREAM("Marker not seen!");
+            }
         }
 
         ros::spinOnce();
