@@ -56,7 +56,7 @@ int main(int argc, char** argv)
             ROS_INFO_STREAM("service request was successful!");
             ROS_INFO_STREAM("Button yes");
             visualization_msgs::Marker marker;
-            marker.header.frame_id = "base_link";
+            marker.header.frame_id = "camera_color_optical_frame";
             marker.header.stamp = ros::Time();
             marker.ns = "my_namespace";
             marker.id = marker_id;
