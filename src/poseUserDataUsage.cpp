@@ -50,41 +50,35 @@ int main(int argc, char** argv)
         jsk_gui_msgs::YesNo::Request req;
         jsk_gui_msgs::YesNo::Response res;
 
-        if(client.call(req, res)){
-            ROS_INFO_STREAM("service request was successful!");
-        }
+        client.call(req, res)
+        
         if(res.yes){
+            ROS_INFO_STREAM("service request was successful!");
             ROS_INFO_STREAM("Button yes");
+            visualization_msgs::Marker marker;
+            marker.header.frame_id = "base_link";
+            marker.header.stamp = ros::Time();
+            marker.ns = "my_namespace";
+            marker.id = marker_id;
+            marker.type = visualization_msgs::Marker::ARROW;
+            marker.action = visualization_msgs::Marker::ADD;
+            marker.pose.position.x = cps.pos_x;
+            marker.pose.position.y = cps.pos_y;
+            marker.pose.position.z = cps.pos_z;
+            marker.pose.orientation.x = cps.or_x;
+            marker.pose.orientation.y = cps.or_y;
+            marker.pose.orientation.z = cps.or_z;
+            marker.pose.orientation.w = cps.or_w;
+            marker.scale.x = 1;
+            marker.scale.y = 0.1;
+            marker.scale.z = 0.1;
+            marker.color.a = 1.0;
+            marker.color.r = 0.0;
+            marker.color.g = 1.0;
+            marker.color.b = 0.0;
+            vis_pub.publish( marker );
+            marker_id += 1;
         }
-        else{
-            ROS_INFO_STREAM("Button no");
-        }
-
-        visualization_msgs::Marker marker;
-        marker.header.frame_id = "base_link";
-        marker.header.stamp = ros::Time();
-        marker.ns = "my_namespace";
-        marker.id = marker_id;
-        marker.type = visualization_msgs::Marker::ARROW;
-        marker.action = visualization_msgs::Marker::ADD;
-        marker.pose.position.x = cps.pos_x;
-        marker.pose.position.y = cps.pos_y;
-        marker.pose.position.z = cps.pos_z;
-        marker.pose.orientation.x = cps.or_x;
-        marker.pose.orientation.y = cps.or_y;
-        marker.pose.orientation.z = cps.or_z;
-        marker.pose.orientation.w = cps.or_w;
-        marker.scale.x = 1;
-        marker.scale.y = 0.1;
-        marker.scale.z = 0.1;
-        marker.color.a = 1.0;
-        marker.color.r = 0.0;
-        marker.color.g = 1.0;
-        marker.color.b = 0.0;
-        vis_pub.publish( marker );
-        marker_id += 1;
-        
-        
 
         ros::spinOnce();
     }

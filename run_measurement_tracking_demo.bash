@@ -23,4 +23,4 @@ docker run -it \
     --volume="$XAUTH:$XAUTH" \
     --runtime=nvidia \
     measurement_tracking_demo_image \
-    bash -c "roslaunch measurement_tracking_demo demo.launch"
+    bash
