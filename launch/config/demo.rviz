@@ -28,6 +28,8 @@ Panels:
     Name: Time
     SyncMode: 0
     SyncSource: Info
+  - Class: jsk_rviz_plugin/YesNoButton
+    Name: YesNoButton
 Visualization Manager:
   Class: ""
   Displays:
@@ -118,7 +120,7 @@ Visualization Manager:
       Value: true
     - Class: rviz/Image
       Enabled: true
-      Image Topic: /camera/rgb/image_rect_color
+      Image Topic: /fiducial_images
       Max Value: 1
       Median window: 5
       Min Value: 0
@@ -145,7 +147,7 @@ Visualization Manager:
       Color Transformer: RGB8
       Download graph: false
       Download map: false
-      Enabled: false
+      Enabled: true
       Filter ceiling (m): 0
       Filter floor (m): 0
       Invert Rainbow: false
