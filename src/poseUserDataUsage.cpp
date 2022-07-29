@@ -57,7 +57,7 @@ int main(int argc, char** argv)
     ros::Subscriber cameraPoseSub = nh.subscribe("/fiducial_transforms", 10, &CameraPoseSub::fiducialCallback, &cps);
     ros::Publisher vis_pub = nh.advertise<visualization_msgs::Marker>( "visualization_marker", 0);
     // ros::ServiceClient client = nh.serviceClient<jsk_gui_msgs::YesNo::Response>("/rviz/yes_no_button");
-    ros::Subscriver record_pose = nh.subscribe("/yes", 10, &CameraPoseSub::yesCallback, &cps)
+    ros::Subscriver record_pose = nh.subscribe("/yes", 10, &CameraPoseSub::yesCallback, &cps);
 
     int marker_id = 0;
     double threshold = 0.2;
