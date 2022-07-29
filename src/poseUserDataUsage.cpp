@@ -11,7 +11,8 @@
 class CameraPoseSub
 {
 public:
-    void odomCallback(const fiducial_msgs::FiducialTransform::ConstPtr& msg);
+    void fiducialCallback(const fiducial_msgs::FiducialTransform::ConstPtr& msg);
+    void yesCallback(const std_msgs::Empty::ConstPtr& msg)
     double pos_x;
     double pos_y;
     double pos_z;
@@ -20,9 +21,10 @@ public:
     double or_z;
     double or_w;
     double time_last_seen;
+    bool record_pose;
 };
 
-void CameraPoseSub::odomCallback(const fiducial_msgs::FiducialTransform::ConstPtr& msg){
+void CameraPoseSub::fiducialCallback(const fiducial_msgs::FiducialTransform::ConstPtr& msg){
 
     int fid_id = msg->fiducial_id;
     if (fid_id == 1)
@@ -39,6 +41,11 @@ void CameraPoseSub::odomCallback(const fiducial_msgs::FiducialTransform::ConstPt
 
 }
 
+void CameraPoseSub::yesCallback(const std_msgs::Empty::ConstPtr& msg){
+
+    record_pose = true;
+}
+
 int main(int argc, char** argv)
 {
     ros::init(argc, argv, "marker_pose_pub");
@@ -46,9 +53,10 @@ int main(int argc, char** argv)
     ros::NodeHandle nh;
 
     CameraPoseSub cps;
-    ros::Subscriber cameraPoseSub = nh.subscribe("/fiducial_transforms", 10, &CameraPoseSub::odomCallback, &cps);
+    ros::Subscriber cameraPoseSub = nh.subscribe("/fiducial_transforms", 10, &CameraPoseSub::fiducialCallback, &cps);
     ros::Publisher vis_pub = nh.advertise<visualization_msgs::Marker>( "visualization_marker", 0);
-    ros::ServiceClient client = nh.serviceClient<jsk_gui_msgs::YesNo::Response>("/rviz/yes_no_button");
+    // ros::ServiceClient client = nh.serviceClient<jsk_gui_msgs::YesNo::Response>("/rviz/yes_no_button");
+    ros::Subscriver record_pose = nh.subscribe("/yes", 10, &CameraPoseSub::yesCallback, &cps)
 
     int marker_id = 0;
     double threshold = 0.2;
@@ -56,14 +64,13 @@ int main(int argc, char** argv)
     while(ros::ok())
     {
         double time_stamp = ros::Time::now().toSec();
-        jsk_gui_msgs::YesNo::Request req;
-        jsk_gui_msgs::YesNo::Response res;
+        // jsk_gui_msgs::YesNo::Request req;
+        // jsk_gui_msgs::YesNo::Response res;
 
-        client.call(req, res);
-        ROS_INFO_STREAM("TEST");
-        if(res.yes){
+        // client.call(req, res);
+        if(cps.record_pose){
 
-            ROS_INFO_STREAM("Button yes");
+            ROS_INFO_STREAM("Yes topic published!");
 
             if (time_stamp - cps.time_last_seen < threshold)
             {
@@ -95,6 +102,7 @@ int main(int argc, char** argv)
             else{
                 ROS_INFO_STREAM("Marker not seen!");
             }
+            cps.record_pose = false;
         }
 
         ros::spinOnce();
