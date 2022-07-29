@@ -7,6 +7,7 @@
 #include <fiducial_msgs/FiducialTransform.h>
 #include <iostream>
 #include <jsk_gui_msgs/YesNo.h>
+#include <std_msgs/Empty.h>
 
 class CameraPoseSub
 {
