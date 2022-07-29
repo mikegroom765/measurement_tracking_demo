@@ -13,7 +13,7 @@ class CameraPoseSub
 {
 public:
     void fiducialCallback(const fiducial_msgs::FiducialTransform::ConstPtr& msg);
-    void yesCallback(const std_msgs::Empty::ConstPtr& msg)
+    void yesCallback(const std_msgs::Empty::ConstPtr& msg);
     double pos_x;
     double pos_y;
     double pos_z;
