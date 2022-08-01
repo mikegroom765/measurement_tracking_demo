@@ -103,7 +103,7 @@ Visualization Manager:
           Value: true
       Marker Scale: 1
       Name: TF
-      Show Arrows: true
+      Show Arrows: false
       Show Axes: true
       Show Names: true
       Tree:
@@ -121,7 +121,7 @@ Visualization Manager:
       Value: true
     - Class: rviz/Image
       Enabled: true
-      Image Topic: /camera/rgb/image_rect_color
+      Image Topic: /fiducial_images
       Max Value: 1
       Median window: 5
       Min Value: 0
@@ -232,7 +232,7 @@ Visualization Manager:
       Channel Name: intensity
       Class: rviz/DepthCloud
       Color: 255; 255; 255
-      Color Image Topic: /fiducial_images
+      Color Image Topic: /camera/rgb/image_rect_color
       Color Transformer: RGB8
       Color Transport Hint: raw
       Decay Time: 0
