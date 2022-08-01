@@ -29,16 +29,16 @@ public:
 void CameraPoseSub::fiducialCallback(const fiducial_msgs::FiducialTransformArray::ConstPtr& msg){
 
     int fid_id = 0;
-    // fid_id = msg.transforms[0].fiducial_id;
+    // fid_id = msg->transforms[0].fiducial_id;
     if (fid_id == 1)
     {
-        pos_x = msg.transforms[0].transform.translation.x;
-        pos_y = msg.transforms[0].transform.translation.y;
-        pos_z = msg.transforms[0].transform.translation.z;
-        or_x = msg.transforms[0].transform.rotation.x;
-        or_y = msg.transforms[0].transform.rotation.y;
-        or_z = msg.transforms[0].transform.rotation.z;
-        or_w = msg.transforms[0].transform.rotation.w;
+        pos_x = msg->transforms[0].transform.translation.x;
+        pos_y = msg->transforms[0].transform.translation.y;
+        pos_z = msg->transforms[0].transform.translation.z;
+        or_x = msg->transforms[0].transform.rotation.x;
+        or_y = msg->transforms[0].transform.rotation.y;
+        or_z = msg->transforms[0].transform.rotation.z;
+        or_w = msg->transforms[0].transform.rotation.w;
         id = fid_id;
     }
 
