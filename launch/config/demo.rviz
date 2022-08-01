@@ -28,8 +28,9 @@ Panels:
     Name: Time
     SyncMode: 0
     SyncSource: Info
-  - Class: jsk_rviz_plugin/YesNoButton
-    Name: YesNoButton
+  - Class: jsk_rviz_plugin/PublishTopic
+    Name: PublishTopic
+    Topic: yes
 Visualization Manager:
   Class: ""
   Displays:
@@ -100,6 +101,14 @@ Visualization Manager:
           Value: true
         odom:
           Value: true
+        fiducial_1:
+          Value: true
+        fiducial_2:
+          Value: false
+        fiducial_3:
+          Value: false
+        fiducial_4:
+          Value: false
       Marker Scale: 1
       Name: TF
       Show Arrows: true
@@ -107,15 +116,23 @@ Visualization Manager:
       Show Names: true
       Tree:
         map:
-          {}
-        odom:
-          camera_link:
-            camera_depth_frame:
-              camera_depth_optical_frame:
+          odom:
+            camera_link:
+              camera_aligned_depth_to_color_frame:
+                camera_color_optical_frame:
+                  fiducial_1:
+                    {}
+                  fiducial_2:
+                    {}
+                  fiducial_3:
+                    {}
+                  fiducial_4:
+                    {}
+              camera_color_frame:
                 {}
-            camera_rgb_frame:
-              camera_rgb_optical_frame:
-                {}
+              camera_depth_frame:
+                camera_depth_optical_frame:
+                  {}
       Update Interval: 0
       Value: true
     - Class: rviz/Image
@@ -255,6 +272,14 @@ Visualization Manager:
       Topic Filter: true
       Use Fixed Frame: true
       Use rainbow: true
+      Value: true
+      - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: visualization_marker
+      Name: Marker
+      Namespaces:
+        {}
+      Queue Size: 100
       Value: true
   Enabled: true
   Global Options:
