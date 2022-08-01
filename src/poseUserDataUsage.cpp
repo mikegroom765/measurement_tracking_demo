@@ -67,6 +67,7 @@ int main(int argc, char** argv)
         if(cps.record_pose){
 
             ROS_INFO_STREAM("Yes topic published!");
+            ROS_INFO_STREAM(cps.fiducial_id);
 
             if (cps.fiducial_id == 1) //cps.fiducial_id == 1 when marker 1 is visible!
             {
