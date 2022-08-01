@@ -29,6 +29,11 @@ public:
 void CameraPoseSub::fiducialCallback(const fiducial_msgs::FiducialTransformArray::ConstPtr& msg){
 
     int fid_id = 0;
+    if (msg->transforms.size() > 0)
+    {
+        ROS_INFO_STREAM("TEst!!!");
+    }
+    
     // fid_id = msg->transforms[0].fiducial_id;
     if (fid_id == 1)
     {
