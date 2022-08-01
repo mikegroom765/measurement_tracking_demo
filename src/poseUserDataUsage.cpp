@@ -78,7 +78,7 @@ int main(int argc, char** argv)
             {
                 ROS_INFO_STREAM("Marker seen, vis marker published!");
                 visualization_msgs::Marker marker;
-                marker.header.frame_id = "camera_color_frame";
+                marker.header.frame_id = "camera_color_optical_frame";
                 marker.header.stamp = ros::Time();
                 marker.ns = "my_namespace";
                 marker.id = marker_id;
