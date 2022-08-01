@@ -78,7 +78,7 @@ int main(int argc, char** argv)
             {
                 ROS_INFO_STREAM("Marker seen, vis marker published!");
                 visualization_msgs::Marker marker;
-                marker.header.frame_id = "camera_color_optical_frame";
+                marker.header.frame_id = "camera_color_frame";
                 marker.header.stamp = ros::Time();
                 marker.ns = "my_namespace";
                 marker.id = marker_id;
@@ -88,12 +88,12 @@ int main(int argc, char** argv)
                 marker.pose.position.y = cps.pos_y;
                 marker.pose.position.z = cps.pos_z;
                 marker.pose.orientation.x = cps.or_x;
-                marker.pose.orientation.y = cps.or_y + 0.7071068;
+                marker.pose.orientation.y = cps.or_y - 0.7071068;
                 marker.pose.orientation.z = cps.or_z;
                 marker.pose.orientation.w = cps.or_w + 0.7071068;
                 marker.scale.x = 0.2;
-                marker.scale.y = 0.05;
-                marker.scale.z = 0.05;
+                marker.scale.y = 0.025;
+                marker.scale.z = 0.025;
                 marker.color.a = 1.0;
                 marker.color.r = 0.0;
                 marker.color.g = 1.0;
