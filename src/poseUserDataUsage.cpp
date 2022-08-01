@@ -22,13 +22,13 @@ public:
     double or_z;
     double or_w;
     bool record_pose;
-    int fiducial_id;
+    int fiducial_id = 0;
 };
 
 void CameraPoseSub::fiducialCallback(const fiducial_msgs::FiducialTransform::ConstPtr& msg){
 
-    fiducial_id = msg->fiducial_id;
-    if (fiducial_id == 1)
+    int fid_id = msg->fiducial_id;
+    if (fid_id == 1)
     {
         pos_x = msg->transform.translation.x;
         pos_y = msg->transform.translation.y;
@@ -37,6 +37,7 @@ void CameraPoseSub::fiducialCallback(const fiducial_msgs::FiducialTransform::Con
         or_y = msg->transform.rotation.y;
         or_z = msg->transform.rotation.z;
         or_w = msg->transform.rotation.w;
+        fiducial_id = fid_id;
     }
 
 }
