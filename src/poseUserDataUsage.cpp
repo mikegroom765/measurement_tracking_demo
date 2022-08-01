@@ -4,6 +4,7 @@
 #include <visualization_msgs/Marker.h>
 #include <geometry_msgs/Pose.h>
 #include <nav_msgs/Odometry.h>
+#include <fiducial_msgs/FiducialTransformArray.h>
 #include <fiducial_msgs/FiducialTransform.h>
 #include <iostream>
 #include <jsk_gui_msgs/YesNo.h>
@@ -12,7 +13,7 @@
 class CameraPoseSub
 {
 public:
-    void fiducialCallback(const fiducial_msgs::FiducialTransform::ConstPtr& msg);
+    void fiducialCallback(const fiducial_msgs::FiducialTransformArray::ConstPtr& msg);
     void yesCallback(const std_msgs::Empty::ConstPtr& msg);
     double pos_x;
     double pos_y;
