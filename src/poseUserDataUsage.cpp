@@ -13,7 +13,7 @@
 class CameraPoseSub
 {
 public:
-    void fiducialCallback(const fiducial_msgs::FiducialTransformArray msg); //::ConstPtr&
+    void fiducialCallback(const fiducial_msgs::FiducialTransformArray::ConstPtr& msg); //::ConstPtr&
     void yesCallback(const std_msgs::Empty::ConstPtr& msg);
     double pos_x;
     double pos_y;
@@ -26,10 +26,10 @@ public:
     int id = 0;
 };
 
-void CameraPoseSub::fiducialCallback(const fiducial_msgs::FiducialTransformArray msg){
+void CameraPoseSub::fiducialCallback(const fiducial_msgs::FiducialTransformArray::ConstPtr& msg){
 
     int fid_id = 0;
-    fid_id = msg.transforms[0].fiducial_id;
+    // fid_id = msg.transforms[0].fiducial_id;
     if (fid_id == 1)
     {
         pos_x = msg.transforms[0].transform.translation.x;
@@ -56,7 +56,7 @@ int main(int argc, char** argv)
     ros::NodeHandle nh;
 
     CameraPoseSub cps;
-    ros::Subscriber cameraPoseSub = nh.subscribe("/fiducial_transforms", 10, &CameraPoseSub::fiducialCallback, &cps);
+    ros::Subscriber cameraPoseSub = nh.subscribe("/fiducial_transforms", 1, &CameraPoseSub::fiducialCallback, &cps);
     ros::Publisher vis_pub = nh.advertise<visualization_msgs::Marker>( "visualization_marker", 0);
     ros::Subscriber record_pose = nh.subscribe("/yes", 10, &CameraPoseSub::yesCallback, &cps);
 
