@@ -30,8 +30,6 @@ void CameraPoseSub::fiducialCallback(const fiducial_msgs::FiducialTransformArray
 
     int fid_id = 0;
     fid_id = msg.transforms[0].fiducial_id;
-    ROS_INFO_STREAM("TEST");
-    ROS_INFO_STREAM(fid_id);
     if (fid_id == 1)
     {
         pos_x = msg.transforms[0].transform.translation.x;
