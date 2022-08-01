@@ -73,7 +73,7 @@ int main(int argc, char** argv)
             ROS_INFO_STREAM("Yes topic published!");
             ROS_INFO_STREAM(cps.id);
 
-            if (cps.fiducial_id == 1) //cps.fiducial_id == 1 when marker 1 is visible!
+            if (cps.id == 1) //cps.fiducial_id == 1 when marker 1 is visible!
             {
                 ROS_INFO_STREAM("Marker seen, vis marker published!");
                 visualization_msgs::Marker marker;
@@ -99,7 +99,7 @@ int main(int argc, char** argv)
                 marker.color.b = 0.0;
                 vis_pub.publish( marker );
                 marker_id += 1;
-                cps.fiducial_id = 0;
+                cps.id = 0;
             }
             else{
                 ROS_INFO_STREAM("Marker not seen!");
