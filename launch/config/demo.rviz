@@ -232,7 +232,7 @@ Visualization Manager:
       Channel Name: intensity
       Class: rviz/DepthCloud
       Color: 255; 255; 255
-      Color Image Topic: /camera/rgb/image_rect_color
+      Color Image Topic: /fiducial_images
       Color Transformer: RGB8
       Color Transport Hint: raw
       Decay Time: 0
