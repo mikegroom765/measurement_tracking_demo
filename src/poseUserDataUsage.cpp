@@ -13,7 +13,7 @@
 class CameraPoseSub
 {
 public:
-    void fiducialCallback(const fiducial_msgs::FiducialTransformArray::ConstPtr& msg);
+    void fiducialCallback(const fiducial_msgs::FiducialTransformArray msg); //::ConstPtr&
     void yesCallback(const std_msgs::Empty::ConstPtr& msg);
     double pos_x;
     double pos_y;
@@ -26,7 +26,7 @@ public:
     int id = 0;
 };
 
-void CameraPoseSub::fiducialCallback(const fiducial_msgs::FiducialTransformArray::ConstPtr& msg){
+void CameraPoseSub::fiducialCallback(const fiducial_msgs::FiducialTransformArray msg){
 
     int fid_id = 0;
     fid_id = msg->transforms[0].fiducial_id;
