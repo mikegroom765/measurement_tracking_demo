@@ -21,16 +21,15 @@ public:
     double or_y;
     double or_z;
     double or_w;
-    double time_last_seen;
     bool record_pose;
+    int fiducial_id;
 };
 
 void CameraPoseSub::fiducialCallback(const fiducial_msgs::FiducialTransform::ConstPtr& msg){
 
-    int fid_id = msg->fiducial_id;
-    if (fid_id == 1)
+    fiducial_id = msg->fiducial_id;
+    if (fiducial_id == 1)
     {
-        time_last_seen = ros::Time::now().toSec();
         pos_x = msg->transform.translation.x;
         pos_y = msg->transform.translation.y;
         pos_z = msg->transform.translation.z;
@@ -56,26 +55,21 @@ int main(int argc, char** argv)
     CameraPoseSub cps;
     ros::Subscriber cameraPoseSub = nh.subscribe("/fiducial_transforms", 10, &CameraPoseSub::fiducialCallback, &cps);
     ros::Publisher vis_pub = nh.advertise<visualization_msgs::Marker>( "visualization_marker", 0);
-    // ros::ServiceClient client = nh.serviceClient<jsk_gui_msgs::YesNo::Response>("/rviz/yes_no_button");
     ros::Subscriber record_pose = nh.subscribe("/yes", 10, &CameraPoseSub::yesCallback, &cps);
 
     int marker_id = 0;
-    double threshold = 0.2;
 
     while(ros::ok())
     {
         double time_stamp = ros::Time::now().toSec();
-        // jsk_gui_msgs::YesNo::Request req;
-        // jsk_gui_msgs::YesNo::Response res;
 
-        // client.call(req, res);
         if(cps.record_pose){
 
             ROS_INFO_STREAM("Yes topic published!");
 
-            if (time_stamp - cps.time_last_seen < threshold)
+            if (cps.fiducial_id == 1) //cps.fiducial_id == 1 when marker 1 is visible!
             {
-                ROS_INFO_STREAM("Marker seen within threshold time!");
+                ROS_INFO_STREAM("Marker seen, vis marker published!");
                 visualization_msgs::Marker marker;
                 marker.header.frame_id = "camera_color_optical_frame";
                 marker.header.stamp = ros::Time();
@@ -99,6 +93,7 @@ int main(int argc, char** argv)
                 marker.color.b = 0.0;
                 vis_pub.publish( marker );
                 marker_id += 1;
+                cps.fiducial_id = 0;
             }
             else{
                 ROS_INFO_STREAM("Marker not seen!");
