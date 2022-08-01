@@ -23,7 +23,7 @@ public:
     double or_z;
     double or_w;
     bool record_pose;
-    int fiducial_id = 0;
+    int fiducial_id;
 };
 
 void CameraPoseSub::fiducialCallback(const fiducial_msgs::FiducialTransformArray::ConstPtr& msg){
